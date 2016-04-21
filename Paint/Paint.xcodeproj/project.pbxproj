@@ -16,7 +16,6 @@
 		446CAE531CC7F0260051315D /* PaintTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 446CAE521CC7F0260051315D /* PaintTests.m */; };
 		446CAE5E1CC7F0260051315D /* PaintUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 446CAE5D1CC7F0260051315D /* PaintUITests.m */; };
 		446CAEAC1CC81A510051315D /* DrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 446CAEAB1CC81A510051315D /* DrawingView.m */; };
-		446CAEB51CC8291B0051315D /* DrawingLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 446CAEB41CC8291B0051315D /* DrawingLine.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,8 +54,6 @@
 		446CAE5F1CC7F0260051315D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		446CAEAA1CC81A510051315D /* DrawingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingView.h; sourceTree = "<group>"; };
 		446CAEAB1CC81A510051315D /* DrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawingView.m; sourceTree = "<group>"; };
-		446CAEB31CC8291B0051315D /* DrawingLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawingLine.h; path = ../DrawingLine.h; sourceTree = "<group>"; };
-		446CAEB41CC8291B0051315D /* DrawingLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DrawingLine.m; path = ../DrawingLine.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,8 +108,6 @@
 				446CAE3C1CC7F0260051315D /* AppDelegate.m */,
 				446CAEAA1CC81A510051315D /* DrawingView.h */,
 				446CAEAB1CC81A510051315D /* DrawingView.m */,
-				446CAEB31CC8291B0051315D /* DrawingLine.h */,
-				446CAEB41CC8291B0051315D /* DrawingLine.m */,
 				446CAE3E1CC7F0260051315D /* ViewController.h */,
 				446CAE3F1CC7F0260051315D /* ViewController.m */,
 				446CAE411CC7F0260051315D /* Main.storyboard */,
@@ -284,7 +279,6 @@
 				446CAE401CC7F0260051315D /* ViewController.m in Sources */,
 				446CAE3D1CC7F0260051315D /* AppDelegate.m in Sources */,
 				446CAE3A1CC7F0260051315D /* main.m in Sources */,
-				446CAEB51CC8291B0051315D /* DrawingLine.m in Sources */,
 				446CAEAC1CC81A510051315D /* DrawingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

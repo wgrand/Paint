@@ -9,7 +9,7 @@
 #import "DrawingView.h"
 
 #define kDefaultLineColor       [UIColor blackColor]
-#define kDefaultLineWidth       10.0f;
+#define kDefaultLineWidth       2.0f;
 #define kDefaultLineAlpha       1.0f
 
 @interface DrawingView() {
@@ -18,6 +18,7 @@
     CGPoint currentPoint;
     CGPoint previousPoint1;
     CGPoint previousPoint2;
+    CGMutablePathRef path;
 
 }
 
@@ -38,7 +39,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-//        [self configure];
+        [self configure];
     }
     return self;
 }
@@ -47,40 +48,68 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-//        [self configure];
+        [self configure];
     }
     return self;
 }
 
 - (void)configure
 {
-    // init the private arrays
-    self.pathArray = [NSMutableArray array];
-    self.bufferArray = [NSMutableArray array];
-    
-    // set the default values for the public properties
+//    // init the private arrays
+//    self.pathArray = [NSMutableArray array];
+//    self.bufferArray = [NSMutableArray array];
+//    
+//    // set the default values for the public properties
     self.lineColor = kDefaultLineColor;
     self.lineWidth = kDefaultLineWidth;
     self.lineAlpha = kDefaultLineAlpha;
-    
-//    self.drawMode = ACEDrawingModeOriginalSize;
-    
-    // set the transparent background
-    self.backgroundColor = [UIColor clearColor];
-    
+
+     path = CGPathCreateMutable();
+
 }
 
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 
 #pragma mark - Drawing Methods
+CGPoint midPoint(CGPoint p1, CGPoint p2)
+{
+    return CGPointMake((p1.x + p2.x) * 0.5, (p1.y + p2.y) * 0.5);
+}
+
+- (void)drawRect:(CGRect)rect {
+     
+     CGContextRef context = UIGraphicsGetCurrentContext();
+     
+     // create the path
+//     CGPathMoveToPoint(path, NULL, previousPoint1.x, previousPoint1.y);
+//     CGPathAddLineToPoint(path, NULL, currentPoint.x, currentPoint.y);
+//     CGPathCloseSubpath(path);
+     
+     // use quad curve instead of line, otherwise strokes will have corners and will look more like polygons
+     
+     // get point between last two points
+     CGPoint mid1 = midPoint(previousPoint1, previousPoint2);
+     
+     // get point between this point and last point
+     CGPoint mid2 = midPoint(currentPoint, previousPoint1);
+     
+     // begin quad curve at midpoint
+     CGPathMoveToPoint(path, NULL, mid1.x, mid1.y);
+     
+     // create quad curve from mid1 to previous point to mid2
+     CGPathAddQuadCurveToPoint(path, NULL, previousPoint1.x, previousPoint1.y, mid2.x, mid2.y);
+
+     // add path to context
+     CGContextAddPath(context, path);
+     
+     // line style
+    CGContextSetLineCap (context, kCGLineCapRound); // round line caps to emulate pen and reduce rugged look
+    CGContextSetLineWidth(context, self.lineWidth); // line width
+     CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor); // set the stroke color
+     
+     CGContextStrokePath(context);
+     
+ }
 
 
 
@@ -96,26 +125,42 @@
     previousPoint1 = [touch previousLocationInView:self];
     currentPoint = [touch locationInView:self];
     
-    NSLog (@"lastPoint = %f, %f; currentPoint = %f, %f", previousPoint1.x, previousPoint1.y, currentPoint.x, currentPoint.y);
-    
-    // init the bezier path
-//    self.currentTool = [self toolWithCurrentSettings];
-//    self.currentTool.lineWidth = self.lineWidth;
-//    self.currentTool.lineColor = self.lineColor;
-//    self.currentTool.lineAlpha = self.lineAlpha;
-    
-    
-    
-//    [self.pathArray addObject:self.currentTool];
-    
     // set the first point in the line path
     initialPoint = currentPoint;
     
-//    // call the delegate
-//    if ([self.delegate respondsToSelector:@selector(drawingView:willBeginDrawUsingTool:)]) {
-//        [self.delegate drawingView:self willBeginDrawUsingTool:self.currentTool];
-//    }
+
 }
+
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    // save all the touches in the path
+    UITouch *touch = [touches anyObject];
+    
+    previousPoint2 = previousPoint1;
+    previousPoint1 = [touch previousLocationInView:self];
+    currentPoint = [touch locationInView:self];
+    
+
+        [self setNeedsDisplay];
+//    }
+    
+}
+
+//
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    // pass last touched to touchesMoved
+    // this enables the artist to mark dots on the canvas
+    [self touchesMoved:touches withEvent:event];
+    
+}
+//
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self touchesEnded:touches withEvent:event];
+}
+
 
 
 @end
