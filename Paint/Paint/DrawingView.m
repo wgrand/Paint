@@ -78,37 +78,37 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 
 - (void)drawRect:(CGRect)rect {
      
-     CGContextRef context = UIGraphicsGetCurrentContext();
-     
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
      // create the path
 //     CGPathMoveToPoint(path, NULL, previousPoint1.x, previousPoint1.y);
 //     CGPathAddLineToPoint(path, NULL, currentPoint.x, currentPoint.y);
 //     CGPathCloseSubpath(path);
-     
-     // use quad curve instead of line, otherwise strokes will have corners and will look more like polygons
-     
-     // get point between last two points
-     CGPoint mid1 = midPoint(previousPoint1, previousPoint2);
-     
-     // get point between this point and last point
-     CGPoint mid2 = midPoint(currentPoint, previousPoint1);
-     
-     // begin quad curve at midpoint
-     CGPathMoveToPoint(path, NULL, mid1.x, mid1.y);
-     
-     // create quad curve from mid1 to previous point to mid2
-     CGPathAddQuadCurveToPoint(path, NULL, previousPoint1.x, previousPoint1.y, mid2.x, mid2.y);
 
-     // add path to context
-     CGContextAddPath(context, path);
-     
-     // line style
+    // use quad curve instead of line, otherwise strokes will have corners and will look more like polygons
+
+    // get point between last two points
+    CGPoint mid1 = midPoint(previousPoint1, previousPoint2);
+
+    // get point between this point and last point
+    CGPoint mid2 = midPoint(currentPoint, previousPoint1);
+
+    // begin quad curve at midpoint
+    CGPathMoveToPoint(path, NULL, mid1.x, mid1.y);
+
+    // create quad curve from mid1 to previous point to mid2
+    CGPathAddQuadCurveToPoint(path, NULL, previousPoint1.x, previousPoint1.y, mid2.x, mid2.y);
+
+    // add path to context
+    CGContextAddPath(context, path);
+
+    // line style
     CGContextSetLineCap (context, kCGLineCapRound); // round line caps to emulate pen and reduce rugged look
     CGContextSetLineWidth(context, self.lineWidth); // line width
-     CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor); // set the stroke color
-     
-     CGContextStrokePath(context);
-     
+    CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor); // set the stroke color
+
+    CGContextStrokePath(context);
+    
  }
 
 
