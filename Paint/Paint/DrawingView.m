@@ -59,12 +59,12 @@
 //    self.pathArray = [NSMutableArray array];
 //    self.bufferArray = [NSMutableArray array];
 //    
-//    // set the default values for the public properties
+    // set the default values for the public properties
     self.lineColor = kDefaultLineColor;
     self.lineWidth = kDefaultLineWidth;
     self.lineAlpha = kDefaultLineAlpha;
 
-     path = CGPathCreateMutable();
+    path = CGPathCreateMutable();
 
 }
 

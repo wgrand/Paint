@@ -18,21 +18,77 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DN1-d5-9vI" userLabel="Drawing View" customClass="DrawingView">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="500"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bT2-13-XWg" userLabel="Toolbar View">
+                                <rect key="frame" x="0.0" y="520" width="600" height="80"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1J-HP-4jW" userLabel="Color Button">
+                                        <rect key="frame" x="487" y="25" width="37" height="30"/>
+                                        <state key="normal" title="Color">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HeS-xB-Izo" userLabel="Clear Button">
+                                        <rect key="frame" x="544" y="25" width="36" height="30"/>
+                                        <state key="normal" title="Clear">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clearButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1vk-YS-H7s"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="783-UN-CMs"/>
+                                    <constraint firstItem="D1J-HP-4jW" firstAttribute="centerY" secondItem="bT2-13-XWg" secondAttribute="centerY" id="AbZ-3C-wRm"/>
+                                    <constraint firstItem="HeS-xB-Izo" firstAttribute="leading" secondItem="D1J-HP-4jW" secondAttribute="trailing" constant="20" id="Ofl-Pk-4t2"/>
+                                    <constraint firstItem="HeS-xB-Izo" firstAttribute="centerY" secondItem="bT2-13-XWg" secondAttribute="centerY" id="T2C-bb-eAv"/>
+                                    <constraint firstAttribute="trailing" secondItem="HeS-xB-Izo" secondAttribute="trailing" constant="20" id="wsb-cj-kpH"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="bT2-13-XWg" secondAttribute="trailing" id="Nna-s2-y5T"/>
+                            <constraint firstItem="bT2-13-XWg" firstAttribute="top" secondItem="DN1-d5-9vI" secondAttribute="bottom" id="OSq-1I-FWh"/>
+                            <constraint firstItem="bT2-13-XWg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="m1p-c2-2uQ"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bT2-13-XWg" secondAttribute="bottom" id="pvF-2i-q0e"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="DN1-d5-9vI" secondAttribute="bottom" id="t7u-Lo-9t8"/>
                             <constraint firstAttribute="trailing" secondItem="DN1-d5-9vI" secondAttribute="trailing" id="wFC-88-LuW"/>
                             <constraint firstItem="DN1-d5-9vI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="xXA-fJ-bqr"/>
                             <constraint firstItem="DN1-d5-9vI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="z6Y-PB-q2F"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="t7u-Lo-9t8"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="587" y="567"/>
+        </scene>
+        <!--Color Picker View Controller-->
+        <scene sceneID="7fn-Em-dYU">
+            <objects>
+                <viewController storyboardIdentifier="ColorPickerViewController" id="tfy-d6-ok3" customClass="ColorPickerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fsN-dk-Gfi"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hve-QG-gia"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PlM-1T-lts">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="61n-j8-xL8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1258" y="567"/>
         </scene>
     </scenes>
 </document>

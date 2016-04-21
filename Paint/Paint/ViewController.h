@@ -10,6 +10,7 @@
 
 @interface ViewController : UIViewController
 
+- (IBAction)clearButtonTouchUpInside:(id)sender;
 
 @end
 
