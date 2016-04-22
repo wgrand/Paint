@@ -25,6 +25,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)colorButtonTouchUpInside:(id)sender {
+    UIViewController *colorPickerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ColorPickerViewController"];
+    
+    [self presentViewController:colorPickerViewController animated:true completion:nil];
+}
+
 - (IBAction)clearButtonTouchUpInside:(id)sender {
+    
+    
 }
 @end
