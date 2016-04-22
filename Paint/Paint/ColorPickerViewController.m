@@ -12,7 +12,7 @@
 CGFloat grayColorCount = 8.0;
 CGFloat colorCount     = 64.0;
 
-NSIndexPath *selectedIndexPath;
+NSIndexPath *selectedItemIndexPath;
 
 @interface ColorPickerViewController ()
 
@@ -52,7 +52,7 @@ static NSString *cellIdentifier = @"wellCollectionViewCell";
 }
 
 UIColor *selectedColor() {
-    return colorFromIndexPath(selectedIndexPath);
+    return colorFromIndexPath(selectedItemIndexPath);
 }
 
 UIColor *colorFromIndexPath (NSIndexPath* indexPath) {
@@ -69,7 +69,6 @@ UIColor *colorFromIndexPath (NSIndexPath* indexPath) {
     // color gradient
     else {
         CGFloat hue = indexPath.row / (colorCount - grayColorCount - 1);
-        NSLog (@"%f", hue);
         cellColor = [UIColor colorWithHue:hue saturation:1 brightness:1 alpha:1];
     }
     
@@ -91,6 +90,15 @@ UIColor *colorFromIndexPath (NSIndexPath* indexPath) {
     WellCollectionViewCell *cell = (WellCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
     cell.backgroundColor = colorFromIndexPath(indexPath);
+    
+    if (selectedItemIndexPath == indexPath)
+    {
+        cell.layer.borderColor = [UIColor blackColor].CGColor;
+        cell.layer.borderWidth = 2.0;
+    }
+    else {
+        cell.layer.borderColor = nil;
+    }
 
     return cell;
     
@@ -102,11 +110,48 @@ UIColor *colorFromIndexPath (NSIndexPath* indexPath) {
     return CGSizeMake(collectionView.frame.size.width / 8, collectionView.frame.size.height / 8);
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    // always reload the selected cell, so we will add the border to that cell
+    
+    NSMutableArray *indexPaths = [NSMutableArray arrayWithObject:indexPath];
+    
+    if (selectedItemIndexPath)
+    {
+        // if we had a previously selected cell
+        
+        if ([indexPath compare:selectedItemIndexPath] == NSOrderedSame)
+        {
+            
+        }
+        else
+        {
+            // if it's different, then add that old one to our list of cells to reload, and
+            // save the currently selected indexPath
+            
+            [indexPaths addObject:selectedItemIndexPath];
+            selectedItemIndexPath = indexPath;
+        }
+    }
+    else
+    {
+        // else, we didn't have previously selected cell, so we only need to save this indexPath for future reference
+        
+        selectedItemIndexPath = indexPath;
+    }
+    
+    // and now only reload only the cells that need updating
+    
+    [wellCollectionView reloadItemsAtIndexPaths:indexPaths];
+}
+
+
 #pragma mark actions
 - (IBAction)cancelAction:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
+// TODO delete this method
 - (IBAction)applyAction:(id)sender {
 
     [self dismissViewControllerAnimated:true completion:nil];

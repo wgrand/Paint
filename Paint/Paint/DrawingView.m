@@ -142,8 +142,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     currentPoint = [touch locationInView:self];
     
 
-        [self setNeedsDisplay];
-//    }
+    [self setNeedsDisplay];
     
 }
 

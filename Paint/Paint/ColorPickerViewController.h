@@ -13,8 +13,6 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *wellCollectionView;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
 
-@property (nonatomic, strong) NSMutableArray *colorArray;
-
 - (IBAction)cancelAction:(id)sender;
 - (IBAction)applyAction:(id)sender;
 
