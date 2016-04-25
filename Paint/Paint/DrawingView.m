@@ -53,10 +53,11 @@
 
 - (void)configure
 {
-//    // init the private arrays
+    
+    // initialize the private arrays
     self.pathArray = [NSMutableArray array];
     self.colorArray = [NSMutableArray array];
-//
+
     // set the default values for the public properties
     self.lineColor = kDefaultLineColor;
     self.lineWidth = kDefaultLineWidth;

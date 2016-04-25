@@ -14,6 +14,8 @@
 
 - (IBAction)clearButtonTouchUpInside:(id)sender;
 @property (strong, nonatomic) IBOutlet DrawingView *drawingView;
+@property (strong, nonatomic) IBOutlet UIView *toolBarView;
+@property (strong, nonatomic) IBOutlet UIButton *colorButton;
 
 @end
 
