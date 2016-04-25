@@ -132,7 +132,6 @@ UIColor *colorFromIndexPath (NSIndexPath* indexPath) {
         {
             // if it's different, then add that old one to our list of cells to reload, and
             // save the currently selected indexPath
-            
             [indexPaths addObject:selectedItemIndexPath];
             selectedItemIndexPath = indexPath;
         }
@@ -140,12 +139,10 @@ UIColor *colorFromIndexPath (NSIndexPath* indexPath) {
     else
     {
         // else, we didn't have previously selected cell, so we only need to save this indexPath for future reference
-        
         selectedItemIndexPath = indexPath;
     }
     
     // and now only reload only the cells that need updating
-    
     [wellCollectionView reloadItemsAtIndexPaths:indexPaths];
 }
 
