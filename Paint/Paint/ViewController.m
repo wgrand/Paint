@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "ColorPickerViewController.h"
 
 @interface ViewController ()
 
@@ -25,4 +26,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)colorButtonTouchUpInside:(id)sender {
+    ColorPickerViewController *colorPickerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ColorPickerViewController"];
+    colorPickerViewController.drawingView = self.drawingView;
+    [self presentViewController:colorPickerViewController animated:true completion:nil];
+}
+
+- (IBAction)clearButtonTouchUpInside:(id)sender {
+    
+    
+}
 @end

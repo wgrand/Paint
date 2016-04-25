@@ -15,9 +15,4 @@
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, assign) CGFloat lineAlpha;
 
-// get the current drawing
-@property (nonatomic, strong, readonly) UIImage *image;
-@property (nonatomic, strong) UIImage *backgroundImage;
-@property (nonatomic, readonly) NSUInteger undoSteps;
-
 @end

@@ -16,6 +16,8 @@
 		446CAE531CC7F0260051315D /* PaintTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 446CAE521CC7F0260051315D /* PaintTests.m */; };
 		446CAE5E1CC7F0260051315D /* PaintUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 446CAE5D1CC7F0260051315D /* PaintUITests.m */; };
 		446CAEAC1CC81A510051315D /* DrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 446CAEAB1CC81A510051315D /* DrawingView.m */; };
+		449C98081CCA60AE007DA95A /* ColorPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 449C98071CCA60AE007DA95A /* ColorPickerViewController.m */; };
+		449C980E1CCA9668007DA95A /* WellCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 449C980D1CCA9668007DA95A /* WellCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,10 @@
 		446CAE5F1CC7F0260051315D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		446CAEAA1CC81A510051315D /* DrawingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingView.h; sourceTree = "<group>"; };
 		446CAEAB1CC81A510051315D /* DrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawingView.m; sourceTree = "<group>"; };
+		449C98061CCA60AE007DA95A /* ColorPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPickerViewController.h; sourceTree = "<group>"; };
+		449C98071CCA60AE007DA95A /* ColorPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorPickerViewController.m; sourceTree = "<group>"; };
+		449C980C1CCA9668007DA95A /* WellCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WellCollectionViewCell.h; sourceTree = "<group>"; };
+		449C980D1CCA9668007DA95A /* WellCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WellCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +120,7 @@
 				446CAE441CC7F0260051315D /* Assets.xcassets */,
 				446CAE461CC7F0260051315D /* LaunchScreen.storyboard */,
 				446CAE491CC7F0260051315D /* Info.plist */,
+				449C980F1CCA9678007DA95A /* Color Picker */,
 				446CAE381CC7F0260051315D /* Supporting Files */,
 			);
 			path = Paint;
@@ -143,6 +150,17 @@
 				446CAE5F1CC7F0260051315D /* Info.plist */,
 			);
 			path = PaintUITests;
+			sourceTree = "<group>";
+		};
+		449C980F1CCA9678007DA95A /* Color Picker */ = {
+			isa = PBXGroup;
+			children = (
+				449C98061CCA60AE007DA95A /* ColorPickerViewController.h */,
+				449C98071CCA60AE007DA95A /* ColorPickerViewController.m */,
+				449C980C1CCA9668007DA95A /* WellCollectionViewCell.h */,
+				449C980D1CCA9668007DA95A /* WellCollectionViewCell.m */,
+			);
+			name = "Color Picker";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,8 +295,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				446CAE401CC7F0260051315D /* ViewController.m in Sources */,
+				449C98081CCA60AE007DA95A /* ColorPickerViewController.m in Sources */,
 				446CAE3D1CC7F0260051315D /* AppDelegate.m in Sources */,
 				446CAE3A1CC7F0260051315D /* main.m in Sources */,
+				449C980E1CCA9668007DA95A /* WellCollectionViewCell.m in Sources */,
 				446CAEAC1CC81A510051315D /* DrawingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
