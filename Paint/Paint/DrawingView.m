@@ -13,7 +13,7 @@
 #define kDefaultLineAlpha       1.0f
 
 @interface DrawingView() {
-    
+        
     CGPoint currentPoint;
     CGPoint previousPoint1;
     CGPoint previousPoint2;
@@ -89,6 +89,19 @@ CGPoint getMidPoint(CGPoint point1, CGPoint point2)
     
  }
 
+- (void) clearDrawing
+{
+
+    // remove all paths
+    [self.pathArray removeAllObjects];
+    
+    // remove all colors
+    [self.colorArray removeAllObjects];
+    
+    // draw the new drawing (which is empty)
+    [self setNeedsDisplay];
+    
+}
 
 
 

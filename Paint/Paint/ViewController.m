@@ -34,6 +34,8 @@
 
 - (IBAction)clearButtonTouchUpInside:(id)sender {
     
+    // clear the drawing
+    [self.drawingView clearDrawing];
     
 }
 @end
