@@ -15,4 +15,6 @@
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, assign) CGFloat lineAlpha;
 
+- (void) clearDrawing;
+
 @end
