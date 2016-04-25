@@ -31,9 +31,6 @@ static NSString *cellIdentifier = @"wellCollectionViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    /* Styles */
-//    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
     
     /* Configure */
