@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DrawingView.h"
 
 @interface ColorPickerViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *wellCollectionView;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
+@property (weak, nonatomic) DrawingView *drawingView;
 
 - (IBAction)cancelAction:(id)sender;
 - (IBAction)applyAction:(id)sender;

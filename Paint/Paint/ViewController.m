@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "ColorPickerViewController.h"
 
 @interface ViewController ()
 
@@ -26,7 +27,8 @@
 }
 
 - (IBAction)colorButtonTouchUpInside:(id)sender {
-    UIViewController *colorPickerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ColorPickerViewController"];
+    ColorPickerViewController *colorPickerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ColorPickerViewController"];
+    colorPickerViewController.drawingView = self.drawingView;
     [self presentViewController:colorPickerViewController animated:true completion:nil];
 }
 

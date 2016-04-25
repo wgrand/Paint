@@ -153,7 +153,12 @@ UIColor *colorFromIndexPath (NSIndexPath* indexPath) {
 
 // TODO delete this method
 - (IBAction)applyAction:(id)sender {
+    
+    // apply the color
+    self.drawingView.lineColor = selectedColor();
 
+    // dismiss this view controller
     [self dismissViewControllerAnimated:true completion:nil];
+    
 }
 @end

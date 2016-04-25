@@ -70,6 +70,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="drawingView" destination="DN1-d5-9vI" id="avd-Vy-k6u"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
