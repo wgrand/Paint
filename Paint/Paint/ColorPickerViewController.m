@@ -78,7 +78,7 @@ UIColor *colorFromIndexPath (NSIndexPath* indexPath) {
 #pragma mark collection view
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 2;
+    return 2; // there are two sections: one for the grayscale colors and the other for a variety of hues
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -89,15 +89,19 @@ UIColor *colorFromIndexPath (NSIndexPath* indexPath) {
     
     WellCollectionViewCell *cell = (WellCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
+    // apply well color
     cell.backgroundColor = colorFromIndexPath(indexPath);
     
+    // apply or remove border
     if (selectedItemIndexPath == indexPath)
     {
+        cell.frame = CGRectInset(cell.frame, -cell.layer.borderWidth, -cell.layer.borderWidth);
         cell.layer.borderColor = [UIColor blackColor].CGColor;
         cell.layer.borderWidth = 2.0;
     }
     else {
         cell.layer.borderColor = nil;
+        cell.layer.borderWidth = 0;
     }
 
     return cell;

@@ -14,7 +14,6 @@
 
 @interface DrawingView() {
     
-    CGPoint initialPoint;
     CGPoint currentPoint;
     CGPoint previousPoint1;
     CGPoint previousPoint2;
@@ -24,10 +23,6 @@
 
 @property (nonatomic, strong) NSMutableArray *pathArray;
 @property (nonatomic, strong) NSMutableArray *colorArray;
-//@property (nonatomic, strong) id<ACEDrawingTool> currentTool;
-@property (nonatomic, strong) UIImage *image;
-@property (nonatomic, strong) UITextView *textView;
-@property (nonatomic, assign) CGFloat originalFrameYPos;
 
 @end
 
@@ -72,19 +67,12 @@
 
 
 #pragma mark - Drawing Methods
-CGPoint midPoint(CGPoint p1, CGPoint p2)
+CGPoint getMidPoint(CGPoint point1, CGPoint point2)
 {
-    return CGPointMake((p1.x + p2.x) * 0.5, (p1.y + p2.y) * 0.5);
+    return CGPointMake(0.5*(point1.x + point2.x), 0.5*(point1.y + point2.y));
 }
 
 - (void)drawRect:(CGRect)rect {
-     
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-
-     // create the path
-//     CGPathMoveToPoint(path, NULL, previousPoint1.x, previousPoint1.y);
-//     CGPathAddLineToPoint(path, NULL, currentPoint.x, currentPoint.y);
-//     CGPathCloseSubpath(path);
 
     for (int i = 0; i < pathArray.count; i++)
     {
@@ -115,20 +103,15 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     previousPoint1 = [touch previousLocationInView:self];
     currentPoint = [touch locationInView:self];
     
-    // set the first point in the line path
-    initialPoint = currentPoint;
-    
     // initialize path
     path = [[UIBezierPath alloc] init];
     
     // begin quad curve at midpoint
-    [path moveToPoint:initialPoint];
-//    CGPathMoveToPoint(path, NULL, initialPoint.x, initialPoint.y);
+    [path moveToPoint:currentPoint];
 
     // add the new path to path array
     [pathArray addObject:path];
     [colorArray addObject:self.lineColor];
-//    path.lineWidth = kDefaultLineWidth;
 
 }
 
@@ -143,25 +126,22 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     currentPoint = [touch locationInView:self];
 
     // get point between last two points
-    CGPoint mid1 = midPoint(previousPoint1, previousPoint2);
+    CGPoint midPoint1 = getMidPoint (previousPoint1, previousPoint2);
     
     // get point between this point and last point
-    CGPoint mid2 = midPoint(currentPoint, previousPoint1);
+    CGPoint midPoint2 = getMidPoint (currentPoint, previousPoint1);
     
     // begin quad curve at midpoint
-//    CGPathMoveToPoint(path, NULL, mid1.x, mid1.y);
-    [path moveToPoint:mid1];
+    [path moveToPoint:midPoint1];
     
-    // create quad curve from mid1 to previous point to mid2
-    // use quad curve instead of line, otherwise strokes will have corners and will look more like polygons
-//    CGPathAddQuadCurveToPoint(path, NULL, previousPoint1.x, previousPoint1.y, mid2.x, mid2.y);
-    [path addQuadCurveToPoint:mid2 controlPoint:previousPoint1];
+    // create quad curve from midPoint1 to previous point to midPoint2
+    // Note: We're using a quad curve instead of line, otherwise strokes will have corners and will look more like polygons
+    [path addQuadCurveToPoint:midPoint2 controlPoint:previousPoint1];
 
     [self setNeedsDisplay];
     
 }
 
-//
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // pass last touched to touchesMoved
@@ -169,11 +149,10 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     [self touchesMoved:touches withEvent:event];
     
 }
-//
+
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self touchesEnded:touches withEvent:event];
-//    CFRelease (path);
 }
 
 
