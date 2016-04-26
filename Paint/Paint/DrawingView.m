@@ -92,16 +92,37 @@ CGPoint getMidPoint(CGPoint point1, CGPoint point2)
 
 - (void) clearDrawing
 {
+    
+    /* fade the drawing before disposing it */
+    
+    [CATransaction begin];
+    
+    // create the animation
+    CABasicAnimation *fadeAnim = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    fadeAnim.fromValue = @(1);
+    fadeAnim.toValue = @(0);
+    fadeAnim.duration = 0.2;
 
-    // remove all paths
-    [self.pathArray removeAllObjects];
+    // when the animation completes, wipe the array containing the path and color history
+    [CATransaction setCompletionBlock:^{
+         
+        // remove all paths
+        [self.pathArray removeAllObjects];
+        
+        // remove all colors
+        [self.colorArray removeAllObjects];
+
+        // draw the new drawing (which is empty)
+        [self setNeedsDisplay];
+        
+     }];
     
-    // remove all colors
-    [self.colorArray removeAllObjects];
+    // add the animation to the layer
+    [self.layer addAnimation:fadeAnim forKey:nil];
     
-    // draw the new drawing (which is empty)
-    [self setNeedsDisplay];
-    
+    // execute the animation
+    [CATransaction commit];
+
 }
 
 
