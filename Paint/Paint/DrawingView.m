@@ -54,7 +54,7 @@
 - (void)configure
 {
     
-    // initialize the private arrays
+    // initialize arrays that retain the drawing history
     self.pathArray = [NSMutableArray array];
     self.colorArray = [NSMutableArray array];
 
@@ -81,25 +81,24 @@ CGPoint getMidPoint(CGPoint point1, CGPoint point2)
         // set the color, so long as the color exists
         if(colorArray.count > i)
             [[colorArray objectAtIndex:i] setStroke];
-    
+        
         // draw the path for that color
         [[pathArray objectAtIndex:i] strokeWithBlendMode:kCGBlendModeNormal alpha:1.0];
-
+        
     }
-
     
  }
 
 - (void) clearDrawing
 {
     
-    /* fade the drawing before disposing it */
+    /* fade the drawing gracefully before disposing it */
     
     [CATransaction begin];
     
     // create the animation
     CABasicAnimation *fadeAnim = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    fadeAnim.fromValue = @(1);
+    fadeAnim.fromValue = [NSNumber numberWithFloat:self.layer.opacity];
     fadeAnim.toValue = @(0);
     fadeAnim.duration = 0.2;
 
@@ -140,8 +139,8 @@ CGPoint getMidPoint(CGPoint point1, CGPoint point2)
     
     // initialize path
     path = [[UIBezierPath alloc] init];
-    
-    // begin quad curve at midpoint
+    path.lineWidth = self.lineWidth;
+    path.lineCapStyle = kCGLineCapRound;
     [path moveToPoint:currentPoint];
 
     // add the new path to path array
@@ -159,20 +158,30 @@ CGPoint getMidPoint(CGPoint point1, CGPoint point2)
     previousPoint2 = previousPoint1;
     previousPoint1 = [touch previousLocationInView:self];
     currentPoint = [touch locationInView:self];
+    
+    // if the touch hasn't moved, then draw a point
+    if (CGPointEqualToPoint (currentPoint, previousPoint1))
+    {
+        
+        [path addLineToPoint:currentPoint];
+        
+    } else {
 
-    // get point between last two points
-    CGPoint midPoint1 = getMidPoint (previousPoint1, previousPoint2);
+        // get point between last two points
+        CGPoint midPoint1 = getMidPoint (previousPoint1, previousPoint2);
+        
+        // get point between this point and last point
+        CGPoint midPoint2 = getMidPoint (currentPoint, previousPoint1);
+        
+        // begin quad curve at midpoint
+        [path moveToPoint:midPoint1];
+        
+        // create quad curve from midPoint1 to previous point to midPoint2
+        // Note: We're using a quad curve instead of line, otherwise strokes will have corners and will look more like polygons
+        [path addQuadCurveToPoint:midPoint2 controlPoint:previousPoint1];
+        
+    }
     
-    // get point between this point and last point
-    CGPoint midPoint2 = getMidPoint (currentPoint, previousPoint1);
-    
-    // begin quad curve at midpoint
-    [path moveToPoint:midPoint1];
-    
-    // create quad curve from midPoint1 to previous point to midPoint2
-    // Note: We're using a quad curve instead of line, otherwise strokes will have corners and will look more like polygons
-    [path addQuadCurveToPoint:midPoint2 controlPoint:previousPoint1];
-
     [self setNeedsDisplay];
     
 }
