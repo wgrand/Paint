@@ -56,8 +56,36 @@
 
 - (IBAction)clearButtonTouchUpInside:(id)sender {
     
-    // clear the drawing
-    [self.drawingView clearDrawing];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Warning" message:@"Are you sure you want clear?" preferredStyle:UIAlertControllerStyleAlert];
+    
+    // make action colors gray
+    alertController.view.tintColor = [UIColor darkGrayColor];
+    
+    // yes action
+    UIAlertAction *yesAction = [UIAlertAction
+                                actionWithTitle:@"Yes"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action)
+                                {
+                                    // clear the drawing
+                                    [self.drawingView clearDrawing];
+                                }];
+    
+    
+    // no action
+    UIAlertAction *noAction = [UIAlertAction
+                                actionWithTitle:@"No"
+                                style:UIAlertActionStyleDefault
+                                handler:nil];
+    
+    [alertController addAction:yesAction];
+    [alertController addAction:noAction];
+    
+    [self presentViewController:alertController animated:true completion:^{
+        // workaround for iOS9 bug where tint color gets reset
+        alertController.view.tintColor = [UIColor darkGrayColor];
+    }];
+    
     
 }
 @end
