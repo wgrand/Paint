@@ -19,13 +19,19 @@
     [super viewDidLoad];
     
 
+    // apply border to color well button
+    self.colorButton.layer.cornerRadius = self.colorButton.frame.size.height/2;
+    self.colorButton.layer.borderColor = [UIColor grayColor].CGColor;
+    self.colorButton.layer.borderWidth = 1;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    self.colorButton.tintColor = self.drawingView.lineColor;
+    // set the color background color to the curent drawing color every time the view appears
+    self.colorButton.backgroundColor = self.drawingView.lineColor;
     
 }
 
