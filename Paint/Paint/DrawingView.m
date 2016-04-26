@@ -89,7 +89,7 @@ CGPoint getMidPoint(CGPoint point1, CGPoint point2)
     {
 
         // set the color, so long as the color exists
-        if(colorArray.count > i)
+        if (colorArray.count > i)
             [[colorArray objectAtIndex:i] setStroke];
         
         // draw the path for that color
@@ -108,29 +108,37 @@ CGPoint getMidPoint(CGPoint point1, CGPoint point2)
     
     // create the animation
     CABasicAnimation *fadeAnim = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    
+    // start the animating layer with the same opacity as the current layer's opacity
     fadeAnim.fromValue = [NSNumber numberWithFloat:self.layer.opacity];
     fadeAnim.toValue = @(0);
     fadeAnim.duration = 0.2;
 
-    // when the animation completes, wipe the array containing the path and color history
+    // when the animation completes, wipe the array containing the path and color history]
     [CATransaction setCompletionBlock:^{
-         
+        
         // remove all paths
         [self.pathArray removeAllObjects];
         
         // remove all colors
         [self.colorArray removeAllObjects];
 
-        // draw the new drawing (which is empty)
+        // draw the new drawing (which is blank)
         [self setNeedsDisplay];
-        
+        self.layer.opacity = 1;
+
      }];
     
     // add the animation to the layer
     [self.layer addAnimation:fadeAnim forKey:nil];
     
+    // set the opacity to 0 so that when this layer appears again after the animating layer completes, it will continue to appear as invisible
+    self.layer.opacity = 0;
+
     // execute the animation
     [CATransaction commit];
+    
+
 
 }
 
