@@ -17,24 +17,63 @@
 - (void)setUp {
     [super setUp];
     
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-    
-    // In UI tests it is usually best to stop immediately when a failure occurs.
+    // Stop immediately when a failure occurs.
     self.continueAfterFailure = NO;
-    // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
+    
+    // Launch application
     [[[XCUIApplication alloc] init] launch];
     
-    // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
-- (void)testExample {
-    // Use recording to get started writing UI tests.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+- (void)testAll {
+    
+    XCUIApplication *app = [[XCUIApplication alloc] init];
+    
+    // draw dot
+    XCUIElement *element = [[[app childrenMatchingType:XCUIElementTypeWindow] elementBoundByIndex:0] childrenMatchingType:XCUIElementTypeOther].element;
+    [[[element childrenMatchingType:XCUIElementTypeOther] elementBoundByIndex:1] tap];
+    
+    // open color picker
+    XCUIElementQuery *toolbarsQuery = app.toolbars;
+    XCUIElement *button = [[toolbarsQuery childrenMatchingType:XCUIElementTypeButton] elementBoundByIndex:0];
+    [button tap];
+    
+    // pick color
+    XCUIElement *element2 = [element childrenMatchingType:XCUIElementTypeOther].element;
+    [element2 tap];
+    
+    // apply color
+    XCUIElementQuery *navigationBarsQuery = app.navigationBars;
+    [navigationBarsQuery.buttons[@"Apply"] tap];
+    
+    // open color picker
+    [button tap];
+
+    // pick same color
+    [element2 tap];
+    
+    // cancel color picker
+    [navigationBarsQuery.buttons[@"Cancel"] tap];
+    
+    // clear drawing
+    XCUIElement *clearButton = toolbarsQuery.buttons[@"Clear"];
+    [clearButton tap];
+    
+    // cancel clear drawing
+    XCUIElementQuery *collectionViewsQuery = app.alerts[@"Warning"].collectionViews;
+    [collectionViewsQuery.buttons[@"No"] tap];
+    [clearButton tap];
+    
+    // confirm clear drawing
+    [collectionViewsQuery.buttons[@"Yes"] tap];
+    
+    // share
+    [toolbarsQuery.buttons[@"Share"] tap];
+    
 }
 
 @end
