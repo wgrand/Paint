@@ -65,6 +65,16 @@
 
 }
 
+- (UIImage*) imageCapture
+{
+    
+    UIGraphicsBeginImageContext(self.bounds.size);
+    [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:NO];
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
 
 
 #pragma mark - Drawing Methods

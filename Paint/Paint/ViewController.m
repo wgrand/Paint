@@ -16,8 +16,11 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
+    // hide the toolbar's hairline
+    self.toolBar.clipsToBounds = true;
 
     // apply border to color well button
     self.colorButton.layer.cornerRadius = self.colorButton.frame.size.height/2;
@@ -35,15 +38,20 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (IBAction)colorButtonTouchUpInside:(id)sender {
     ColorPickerViewController *colorPickerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ColorPickerViewController"];
     colorPickerViewController.drawingView = self.drawingView;
     [self presentViewController:colorPickerViewController animated:true completion:nil];
+}
+
+- (IBAction)shareButtonTouchUpInside:(id)sender {
+    
+    NSArray *items = @[self.drawingView.imageCapture];
+    
+    // build an activity view controller
+    UIActivityViewController *controller = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
+    
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (IBAction)clearButtonTouchUpInside:(id)sender {

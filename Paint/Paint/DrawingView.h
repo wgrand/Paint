@@ -16,5 +16,6 @@
 @property (nonatomic, assign) CGFloat lineAlpha;
 
 - (void) clearDrawing;
+- (UIImage*) imageCapture;
 
 @end
