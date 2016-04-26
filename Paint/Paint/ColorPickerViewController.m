@@ -107,8 +107,8 @@ UIColor *colorFromIndexPath (NSIndexPath* indexPath) {
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // size cell according to the size of the screen
-    return CGSizeMake(collectionView.frame.size.width / 8, collectionView.frame.size.height / 8);
+    // size cell according to the size of the view
+    return CGSizeMake(collectionView.bounds.size.width / 8, collectionView.bounds.size.height / 8);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

@@ -46,12 +46,13 @@
 
 - (IBAction)shareButtonTouchUpInside:(id)sender {
     
+    // get an image capture of the drawing
     NSArray *items = @[self.drawingView.imageCapture];
     
-    // build an activity view controller
+    // present activity view controller with the image
     UIActivityViewController *controller = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
-    
     [self presentViewController:controller animated:YES completion:nil];
+    
 }
 
 - (IBAction)clearButtonTouchUpInside:(id)sender {

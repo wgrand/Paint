@@ -10,6 +10,7 @@
 #import "DrawingView.h"
 
 @interface ViewController : UIViewController
+
 - (IBAction)colorButtonTouchUpInside:(id)sender;
 - (IBAction)shareButtonTouchUpInside:(id)sender;
 
