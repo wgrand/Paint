@@ -50,9 +50,14 @@
     NSArray *items = @[self.drawingView.imageCapture];
     
     // present activity view controller with the image
-    UIActivityViewController *controller = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
-    [self presentViewController:controller animated:YES completion:nil];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
     
+    // provide sourceView if iPad
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+        activityViewController.popoverPresentationController.sourceView = sender;
+    
+    [self presentViewController:activityViewController animated:YES completion:nil];
+
 }
 
 - (IBAction)clearButtonTouchUpInside:(id)sender {
